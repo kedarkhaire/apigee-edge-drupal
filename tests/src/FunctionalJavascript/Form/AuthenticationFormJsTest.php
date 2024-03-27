@@ -459,7 +459,7 @@ class AuthenticationFormJsTest extends ApigeeEdgeFunctionalJavascriptTestBase {
     $this->assertNotNull($web_assert->waitForElementVisible('css', '.ajax-progress.ajax-progress-throbber', 30000));
 
     // Wait for the test to complete.
-    $web_assert->waitForElementVisible('css', '.ajax-progress.ajax-progress-throbber', 30000)
+    $web_assert->waitForElementVisible('css', '.ajax-progress.ajax-progress-throbber', 30000);
     $web_assert->elementTextContains('css', $message_selector, $message);
   }
 
