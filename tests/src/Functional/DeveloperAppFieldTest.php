@@ -181,11 +181,13 @@ class DeveloperAppFieldTest extends ApigeeEdgeFunctionalTestBase {
       ],
       strtolower($this->randomMachineName()) => [
         'type' => 'list_float',
-        'settings[allowed_values]' => implode(PHP_EOL, [
-          round(M_PI, 10),
-          round(M_E, 10),
-          round(M_EULER, 10),
-        ]),
+        'settings' => [
+          '[allowed_values]' => implode(PHP_EOL, [
+            round(M_PI, 10),
+            round(M_E, 10),
+            round(M_EULER, 10),
+          ]),
+        ],
         'data' => [
           ['value' => round(M_PI, 10)],
         ],
@@ -193,7 +195,9 @@ class DeveloperAppFieldTest extends ApigeeEdgeFunctionalTestBase {
       ],
       strtolower($this->randomMachineName()) => [
         'type' => 'list_integer',
-        'settings[allowed_values]' => implode(PHP_EOL, [1, 2, 3]),
+        'settings' => [
+          '[allowed_values]' => implode(PHP_EOL, [1, 2, 3]),
+        ],
         'data' => [
           ['value' => 2],
           ['value' => 3],

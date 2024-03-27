@@ -322,7 +322,9 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
       ],
       'list_integer' => [
         'name' => strtolower($this->randomMachineName()),
-        'settings[allowed_values]' => implode(PHP_EOL, [1, 2, 3]),
+        'settings' => [
+          '[allowed_values]' => implode(PHP_EOL, [1, 2, 3]),
+        ],
         'data' => [
           ['value' => 2],
           ['value' => 3],
@@ -334,11 +336,13 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
       ],
       'list_string' => [
         'name' => strtolower($this->randomMachineName()),
-        'settings[allowed_values]' => implode(PHP_EOL, [
-          'qwer',
-          'asdf',
-          'zxcv',
-        ]),
+        'settings' => [
+          '[allowed_values]' => implode(PHP_EOL, [
+            'qwer',
+            'asdf',
+            'zxcv',
+          ]),
+        ],
         'data' => [
           ['value' => 'qwer'],
           ['value' => 'asdf'],
