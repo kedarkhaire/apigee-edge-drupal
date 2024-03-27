@@ -335,10 +335,10 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
       'list_string' => [
         'name' => strtolower($this->randomMachineName()),
         'settings[allowed_values]' => implode(PHP_EOL, [
-            'qwer',
-            'asdf',
-            'zxcv',
-          ]),
+          'qwer',
+          'asdf',
+          'zxcv',
+        ]),
         'data' => [
           ['value' => 'qwer'],
           ['value' => 'asdf'],
