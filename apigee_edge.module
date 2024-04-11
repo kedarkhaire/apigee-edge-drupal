@@ -718,6 +718,8 @@ function apigee_edge_form_user_form_alter(&$form, FormStateInterface $form_state
   // connection validation apigee_edge_module_implements_alter() ensures that
   // form_alter hook is called in the last time.
   $validation_functions[] = 'apigee_edge_form_user_form_developer_email_validate';
+  // Validates whether the provided email address is in lowercase.
+  $validation_functions[] = 'apigee_edge_email_field_validate';
   $form['#validate'] = array_merge($validation_functions, $form['#validate']);
 }
 
@@ -759,6 +761,36 @@ function apigee_edge_form_user_form_developer_email_validate(array $form, FormSt
 }
 
 /**
+ * Validates whether the provided email address is in lowercase.
+ *
+ * @param array $form
+ *   Form array.
+ * @param Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state object.
+ */
+function apigee_edge_email_field_validate(array $form, FormStateInterface $form_state) {
+  // Validates the email address is in lowercase.
+  try {
+    /** @var \Drupal\apigee_edge\SDKConnectorInterface $sdk_connector */
+    $sdk_connector = \Drupal::service('apigee_edge.sdk_connector');
+    $org_controller = \Drupal::service('apigee_edge.controller.organization');
+    /* @var \Apigee\Edge\Api\Management\Entity\Organization $organization */
+    $organization = $org_controller->load($sdk_connector->getOrganization());
+
+    // Check if organization is ApigeeX.
+    if ($organization && ('CLOUD' === $organization->getRuntimeType() || 'HYBRID' === $organization->getRuntimeType())) {
+      if (preg_match('/[A-Z]/', $form_state->getValue('mail'))) {
+        $form_state->setErrorByName('mail', t('This email address accepts only lowercase characters.'));
+      }
+    }
+  }
+  catch (\Exception $exception) {
+    // If not able to connect to Apigee Edge.
+    Drupal::logger('apigee_edge')->error($exception->getMessage());
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function apigee_edge_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -785,6 +817,8 @@ function apigee_edge_form_user_register_form_alter(&$form, FormStateInterface $f
       // API connection validation apigee_edge_module_implements_alter() ensures
       // that form_alter hook is called in the last time.
       $validation_functions[] = 'apigee_edge_form_user_register_form_developer_email_validate';
+      // Validates whether the provided email address is in lowercase.
+      $validation_functions[] = 'apigee_edge_email_field_validate';
 
       try {
         $developer = Developer::load($userInput['mail']);
