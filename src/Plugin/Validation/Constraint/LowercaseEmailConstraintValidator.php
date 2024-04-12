@@ -20,7 +20,7 @@ class LowercaseEmailConstraintValidator extends ConstraintValidator {
         /** @var \Drupal\apigee_edge\SDKConnectorInterface $sdk_connector */
         $sdk_connector = \Drupal::service('apigee_edge.sdk_connector');
         $org_controller = \Drupal::service('apigee_edge.controller.organization');
-        /* @var \Apigee\Edge\Api\Management\Entity\Organization $organization */
+        /** @var \Apigee\Edge\Api\Management\Entity\Organization $organization */
         $organization = $org_controller->load($sdk_connector->getOrganization());
 
         // Check if organization is ApigeeX.
