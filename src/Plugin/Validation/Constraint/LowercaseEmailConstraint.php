@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraint;
  * Checks that the submitted value is a unique integer.
  *
  * @Constraint(
- *   id = "LowercaseEmail",
+ *   id = "DeveloperLowercaseEmail",
  *   label = @Translation("Lowercase Email", context = "Validation"),
  *   type = "email"
  * )
