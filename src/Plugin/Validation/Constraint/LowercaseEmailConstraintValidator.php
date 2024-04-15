@@ -33,7 +33,7 @@ class LowercaseEmailConstraintValidator extends ConstraintValidator {
       }
       catch (\Exception $exception) {
         // If not able to connect to Apigee Edge.
-        Drupal::logger('apigee_edge')->error($exception->getMessage());
+        \Drupal::logger('apigee_edge')->error($exception->getMessage());
       }
     }
   }
