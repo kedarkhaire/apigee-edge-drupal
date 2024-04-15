@@ -162,7 +162,7 @@ class DeveloperTest extends ApigeeEdgeFunctionalTestBase {
    */
   protected function developerRegisterTest() {
     $test_user = [
-      'email' => strtolower($this->randomMachineName()) . '@example.com',
+      'email' => $this->randomMachineName() . '@example.com',
       'username' => $this->randomMachineName(),
       'first_name' => $this->getRandomGenerator()->word(16),
       'last_name' => $this->getRandomGenerator()->word(16),
@@ -258,7 +258,7 @@ class DeveloperTest extends ApigeeEdgeFunctionalTestBase {
     $this->drupalLogin($this->rootUser);
 
     $test_user = [
-      'email' => strtolower($this->randomMachineName()) . '@example.com',
+      'email' => $this->randomMachineName() . '@example.com',
       'first_name' => $this->getRandomGenerator()->word(16),
       'last_name' => $this->getRandomGenerator()->word(16),
       'username' => $this->randomMachineName(),
