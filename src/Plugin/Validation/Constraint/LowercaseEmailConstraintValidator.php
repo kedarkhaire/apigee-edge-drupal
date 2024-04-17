@@ -80,18 +80,23 @@ class LowercaseEmailConstraintValidator extends ConstraintValidator implements C
    * {@inheritdoc}
    */
   public function validate($value, Constraint $constraint) {
-    if (!isset($this->cache[$this->sdkConnector->getOrganization()])) {
-      // Check if organization is ApigeeX.
-      if ($this->orgController->isOrganizationApigeeX()) {
-        $this->cache[$this->sdkConnector->getOrganization()] = $this->orgController->load($this->sdkConnector->getOrganization());
-        foreach ($value as $item) {
-          if (preg_match('/[A-Z]/', $item->value)) {
-            // If value contains uppercase character, the error, is applied.
-            $this->context->addViolation($constraint->notLowercase, ['%value' => $item->value]);
+    try {
+      if (!isset($this->cache[$this->sdkConnector->getOrganization()])) {
+        // Check if organization is ApigeeX.
+        if ($this->orgController->isOrganizationApigeeX()) {
+          $this->cache[$this->sdkConnector->getOrganization()] = $this->orgController->load($this->sdkConnector->getOrganization());
+          foreach ($value as $item) {
+            if (preg_match('/[A-Z]/', $item->value)) {
+              // If value contains uppercase character, the error is applied.
+              $this->context->addViolation($constraint->notLowercase, ['%value' => $item->value]);
+            }
           }
         }
       }
     }
+    catch (\Exception $e) {
+      // If not able to connect to Apigee Edge.
+      \Drupal::logger('apigee_edge')->error($e->getMessage());
+    }
   }
-
 }
