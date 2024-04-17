@@ -82,14 +82,14 @@ class LowercaseEmailConstraintValidator extends ConstraintValidator implements C
   public function validate($value, Constraint $constraint) {
     try {
       if (!isset($this->cache[$this->sdkConnector->getOrganization()])) {
-        // Check if organization is ApigeeX.
-        if ($this->orgController->isOrganizationApigeeX()) {
-          $this->cache[$this->sdkConnector->getOrganization()] = $this->orgController->load($this->sdkConnector->getOrganization());
-          foreach ($value as $item) {
-            if (preg_match('/[A-Z]/', $item->value)) {
-              // If value contains uppercase character, the error is applied.
-              $this->context->addViolation($constraint->notLowercase, ['%value' => $item->value]);
-            }
+        $this->cache[$this->sdkConnector->getOrganization()] = $this->orgController;
+      }
+      // Check if organization is ApigeeX.
+      if ($this->cache[$this->sdkConnector->getOrganization()]->isOrganizationApigeeX()) {
+        foreach ($value as $item) {
+          if (preg_match('/[A-Z]/', $item->value)) {
+            // The value contains uppercase character, the error, is applied.
+            $this->context->addViolation($constraint->notLowercase, ['%value' => $item->value]);
           }
         }
       }
