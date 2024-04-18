@@ -99,4 +99,5 @@ class LowercaseEmailConstraintValidator extends ConstraintValidator implements C
       \Drupal::logger('apigee_edge')->error($e->getMessage());
     }
   }
+
 }
