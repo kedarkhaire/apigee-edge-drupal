@@ -338,6 +338,31 @@ function apigee_edge_entity_base_field_info_alter(&$fields, EntityTypeInterface 
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter() for install_configure_form().
+ *
+ * Allows the profile to alter the site configuration form.
+ */
+function apigee_edge_form_install_configure_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#validate'][] = 'apigee_edge_checkemail';
+}
+
+function apigee_edge_checkemail(&$form, FormStateInterface $form_state) {
+  try {
+    $org_controller = \Drupal::service('apigee_edge.controller.organization');
+    // Check if org is ApigeeX.
+    if ($org_controller->isOrganizationApigeeX()) {
+      if (preg_match('/[A-Z]/', $form_state->getValue(['account', 'mail']))) {
+        $form_state->setErrorByName('account][mail', 'This email address accepts only lowercase characters.');
+      }
+   }
+ }
+ catch (\Exception $exception) {
+   // If not able to connect to Apigee Edge.
+   Drupal::logger('apigee_edge')->error($exception->getMessage());
+ }
+}
+
+/**
  * Implements hook_entity_extra_field_info().
  */
 function apigee_edge_entity_extra_field_info() {

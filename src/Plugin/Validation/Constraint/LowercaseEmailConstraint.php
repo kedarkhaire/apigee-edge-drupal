@@ -38,6 +38,6 @@ class LowercaseEmailConstraint extends Constraint {
    *
    * @var string
    */
-  public $notLowercase = 'This email address - %value has uppercase characters, it accepts only lowercase characters.';
+  public $notLowercase = 'This email address accepts only lowercase characters.';
 
 }
