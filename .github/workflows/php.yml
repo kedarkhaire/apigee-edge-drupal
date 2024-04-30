@@ -15,6 +15,7 @@ env:
   BROWSERTEST_OUTPUT_DIRECTORY: "sites/simpletest/browser_output"
   BROWSERTEST_OUTPUT_BASE_URL: ""
   MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "chromeOptions": { "w3c": false } }, "http://127.0.0.1:9515/wd/hub"]'
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 on:
   push:
