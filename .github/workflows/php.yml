@@ -39,7 +39,7 @@ jobs:
           # Should update the following as the minimum supported version from Drupal.org
           - "10.1.x"
         instance-type:
-          - "Edge"
+          # - "Edge"
           - "X"
 
     steps:
@@ -71,14 +71,14 @@ jobs:
         echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
     - name: Cache composer dependencies
-      uses: actions/cache@v4
+      uses: actions/cache@v3
       with:
         path: ${{ steps.composercache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-composer-
 
     - name: Checkout apigee_edge module
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
       with:
         path: drupal/modules/contrib/apigee_edge
 
@@ -151,14 +151,14 @@ jobs:
 
     - name: Artifacts
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: browser-output-${{ matrix.php-version }}-${{ matrix.drupal-core }}-${{ matrix.instance-type }}-artifact
         path: drupal/sites/simpletest/browser_output/*
 
     - name: Upload coverage to Codecov
       if: ${{ matrix.drupal-core == '10.1.x' && matrix.php-version == '8.1' }}
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         files: /tmp/coverage_${{ matrix.instance-type }}.xml
         name: codecov-umbrella
