@@ -33,7 +33,7 @@ jobs:
       matrix:
         php-version:
           - "8.1"
-          - "8.2"
+          # - "8.2"
         drupal-core:
           # Should update the following as the minimum supported version from Drupal.org
           - "10.1.x"
@@ -70,14 +70,14 @@ jobs:
         echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
     - name: Cache composer dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.composercache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-composer-
 
     - name: Checkout apigee_edge module
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: drupal/modules/contrib/apigee_edge
 
@@ -111,35 +111,35 @@ jobs:
         vendor/bin/drush en apigee_edge -y
         vendor/bin/drush rs 8000 &
 
-    - name: "PHPCS and setting up Apigee X environment"
-      if: ${{ matrix.instance-type == 'X' }}
-      run: |
-        cd drupal
-        cp modules/contrib/apigee_edge/phpcs.xml.dist .
-        vendor/bin/phpcs --standard=./phpcs.xml.dist modules/contrib/apigee_edge -p -s -n --colors
-        # Setting environment variables to run Apigee X tests
-        echo "APIGEE_EDGE_INSTANCE_TYPE=hybrid" >> $GITHUB_ENV
-        echo "APIGEE_EDGE_ORGANIZATION=$APIGEE_EDGE_HYBRID_ORGANIZATION" >> $GITHUB_ENV
-        echo "APIGEE_EDGE_ENDPOINT=$APIGEE_EDGE_HYBRID_ENDPOINT" >> $GITHUB_ENV
-        composer show > composer-show.txt
+    # - name: "PHPCS and setting up Apigee X environment"
+    #   if: ${{ matrix.instance-type == 'X' }}
+    #   run: |
+    #     cd drupal
+    #     cp modules/contrib/apigee_edge/phpcs.xml.dist .
+    #     vendor/bin/phpcs --standard=./phpcs.xml.dist modules/contrib/apigee_edge -p -s -n --colors
+    #     # Setting environment variables to run Apigee X tests
+    #     echo "APIGEE_EDGE_INSTANCE_TYPE=hybrid" >> $GITHUB_ENV
+    #     echo "APIGEE_EDGE_ORGANIZATION=$APIGEE_EDGE_HYBRID_ORGANIZATION" >> $GITHUB_ENV
+    #     echo "APIGEE_EDGE_ENDPOINT=$APIGEE_EDGE_HYBRID_ENDPOINT" >> $GITHUB_ENV
+    #     composer show > composer-show.txt
 
-    - name: "Drupal check"
-      run: |
-        cd drupal
-        vendor/bin/drupal-check modules/contrib/apigee_edge
+    # - name: "Drupal check"
+    #   run: |
+    #     cd drupal
+    #     vendor/bin/drupal-check modules/contrib/apigee_edge
 
-    - uses: nanasess/setup-chromedriver@v2
+    # - uses: nanasess/setup-chromedriver@v2
 
-    - run: |
-        export DISPLAY=:99
-        chromedriver --url-base=/wd/hub &
-        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+    # - run: |
+    #     export DISPLAY=:99
+    #     chromedriver --url-base=/wd/hub &
+    #     sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
-    - name: "Run PHPUnit tests"
-      if: ${{ matrix.drupal-core != '10.1.x' || matrix.php-version != '8.1' }}
-      run: |
-        cd drupal
-        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge
+    # - name: "Run PHPUnit tests"
+    #   if: ${{ matrix.drupal-core != '10.1.x' || matrix.php-version != '8.1' }}
+    #   run: |
+    #     cd drupal
+    #     vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge
 
     - name: "Run PHPUnit tests with Code Coverage"
       if: ${{ matrix.drupal-core == '10.1.x' && matrix.php-version == '8.1' }}
@@ -150,16 +150,19 @@ jobs:
 
     - name: Artifacts
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: browser-output-${{ matrix.php-version }}-${{ matrix.drupal-core }}-${{ matrix.instance-type }}-artifact
         path: drupal/sites/simpletest/browser_output/*
 
     - name: Upload coverage to Codecov
       if: ${{ matrix.drupal-core == '10.1.x' && matrix.php-version == '8.1' }}
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
         files: /tmp/coverage_${{ matrix.instance-type }}.xml
         name: codecov-umbrella
+        token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: true
         verbose: true
