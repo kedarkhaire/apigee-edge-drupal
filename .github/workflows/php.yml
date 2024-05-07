@@ -149,6 +149,7 @@ jobs:
       with:
         files: /tmp/coverage_${{ matrix.instance-type }}.xml
         name: codecov-umbrella
+        codecov_yml_path: codecov.yml
         token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: true
         verbose: true
