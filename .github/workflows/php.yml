@@ -77,7 +77,7 @@ jobs:
         restore-keys: ${{ runner.os }}-composer-
 
     - name: Checkout apigee_edge module
-      uses: actions/checkout@4
+      uses: actions/checkout@v4
       with:
         path: drupal/modules/contrib/apigee_edge
 
@@ -162,6 +162,5 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: /tmp/coverage_${{ matrix.instance-type }}.xml
         name: codecov-umbrella
-        codecov_yml_path: codecov.yml
         fail_ci_if_error: true
         verbose: true
