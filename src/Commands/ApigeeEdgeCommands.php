@@ -103,7 +103,8 @@ class ApigeeEdgeCommands extends DrushCommands {
       'base-url' => NULL,
       'role-name' => NULL,
       'force' => FALSE,
-    ]) {
+    ],
+  ) {
 
     // Call the CLI Service.
     $this->cliService->createEdgeRoleForDrupal(
