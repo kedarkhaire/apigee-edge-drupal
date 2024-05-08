@@ -146,8 +146,9 @@ jobs:
     - name: Upload coverage to Codecov
       if: ${{ matrix.drupal-core == '10.1.x' && matrix.php-version == '8.1' }}
       uses: codecov/codecov-action@v4.3.1
-      continue-on-error: true # Note: Don't fail for upload failures
+      #continue-on-error: true # Note: Don't fail for upload failures
       with:
+        path: drupal/modules/contrib/apigee_edge
         files: /tmp/coverage_${{ matrix.instance-type }}.xml
         name: codecov-umbrella
         codecov_yml_path: codecov.yml
