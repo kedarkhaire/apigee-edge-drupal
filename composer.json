@@ -33,6 +33,11 @@
             "services": {
                 "drush.services.yml": "^12"
             }
+        },
+        "patches": {
+            "drupal/core": {
+                "TypeError: FieldTypePluginManager::createFieldItem() called in FieldStorageConfig.php":"https://www.drupal.org/files/issues/2024-05-27/field-typeerror-3450175-3.patch"
+            }
         }
     }
 }
