@@ -406,7 +406,7 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
           ['value' => 1]
         ],
         'data_changed' => [
-          ['value' => 0]
+          ['value' => 2]
         ],
       ],
       'list_string' => [
@@ -426,7 +426,7 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
           ['value' => 'one']
         ],
         'data_changed' => [
-          ['value' => 'one']
+          ['value' => 'two']
         ],
       ],
       'list_float' => [
@@ -448,7 +448,7 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
           ['value' => 0.5]
         ],
         'data_changed' => [
-          ['value' => 0.5]
+          ['value' => 0.8]
         ],
       ]
     ];
