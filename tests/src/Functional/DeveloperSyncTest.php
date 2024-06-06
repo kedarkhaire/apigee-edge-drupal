@@ -402,12 +402,11 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
           1 => 'One'
         ],
         'odata' => [
-          ['value' => 2],
-          ['value' => 3]
+          ['value' => 0],
+          ['value' => 1]
         ],
         'data_changed' => [
-          ['value' => 1],
-          ['value' => 3],
+          ['value' => 0]
         ],
       ],
       'list_string' => [
@@ -446,10 +445,10 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
           '2' => 'Two'
         ],
         'odata' => [
-          ['value' => round(M_PI, 10)]
+          ['value' => 0.5]
         ],
         'data_changed' => [
-          ['value' => round(M_PI, 10)]
+          ['value' => 0.5]
         ],
       ]
     ];

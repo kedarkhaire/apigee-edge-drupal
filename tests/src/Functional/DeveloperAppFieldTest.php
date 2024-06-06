@@ -252,7 +252,7 @@ class DeveloperAppFieldTest extends ApigeeEdgeFunctionalTestBase {
           0 => 'Zero',
           1 => 'One'
         ],
-        'encoded' => '1,3',
+        'encoded' => '0,1',
       ],
       'list_string' => [
         'name' => strtolower($this->randomMachineName()),
@@ -266,7 +266,7 @@ class DeveloperAppFieldTest extends ApigeeEdgeFunctionalTestBase {
           'zero' => 'Zero',
           'one' => 'One'
         ],
-        'encoded' => 'qwer,asdf,zxcv',
+        'encoded' => 'zero,one',
       ],
       'list_float' => [
         'name' => strtolower($this->randomMachineName()),
