@@ -456,7 +456,7 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
     // Changes for field of types 'list' fields
     // Using field configs to save the fields as issue is faced by FieldUiTestTrait.
     foreach ($this->listFields as $list_type => $listData) {
-      $this->fieldName = 'field_' . $listData['name'];
+      $this->fieldName = $listData['name'];
       $this->createOptionsField($list_type);
       $this->assertAllowedValuesInput($listData['settings'], $listData['data'], '');
     }
