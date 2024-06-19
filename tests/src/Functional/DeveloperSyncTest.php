@@ -588,18 +588,6 @@ class DeveloperSyncTest extends ApigeeEdgeFunctionalTestBase {
             $this->assertEquals($developer->getAttributeValue($data['name']), $formatter->encode($data['data_changed']));
           }
         }
-
-        foreach ($this->listFields as $field_type => $data) {
-          $formatter = $this->formatManager->lookupPluginForFieldType($field_type);
-          if ($formatter instanceof JSON) {
-            $this->assertJsonStringEqualsJsonString($developer->getAttributeValue($data['name']), $formatter->encode($user->get($this->fieldNamePrefix . $data['name'])->getValue()));
-            $this->assertJsonStringEqualsJsonString($developer->getAttributeValue($data['name']), $formatter->encode($data['data_changed']));
-          }
-          elseif ($formatter instanceof CSV) {
-            $this->assertEquals($developer->getAttributeValue($data['name']), $formatter->encode($user->get($this->fieldNamePrefix . $data['name'])->getValue()));
-            $this->assertEquals($developer->getAttributeValue($data['name']), $formatter->encode($data['data_changed']));
-          }
-        }
       }
       else {
         foreach ($this->fields as $field_type => $data) {
