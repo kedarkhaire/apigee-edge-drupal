@@ -23,6 +23,7 @@ namespace Drupal\apigee_edge\Element;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Security\Attribute\TrustedCallback;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -86,6 +87,7 @@ class ApigeeEntityListElement extends RenderElementBase implements ContainerFact
   /**
    * Pre-render callback.
    */
+  #[TrustedCallback]
   public function preRender($element) {
     $element['items'] = $this->entityTypeManager->getViewBuilder($element['#entity_type']->id())
       ->viewMultiple($element['#entities'], $element['#view_mode']);

@@ -20,6 +20,7 @@
 namespace Drupal\apigee_edge\Element;
 
 use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Security\Attribute\TrustedCallback;
 
 /**
  * Provides a status property element.
@@ -73,6 +74,7 @@ class StatusPropertyElement extends RenderElementBase {
    * @return array
    *   A renderable array.
    */
+  #[TrustedCallback]
   public static function preRenderStatusProperty(array $element): array {
     $element['#attached']['library'][] = 'apigee_edge/apigee_edge.status_property';
     return $element;
