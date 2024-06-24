@@ -20,14 +20,14 @@
 
 namespace Drupal\apigee_edge\Element;
 
-use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Render\Element\RenderElement;
 
 /**
  * Provides a product listing element for app credentials.
  *
- * @RenderElementBase("app_credential_product_list")
+ * @RenderElement("app_credential_product_list")
  */
-class AppCredentialProductListElement extends RenderElementBase {
+class AppCredentialProductListElement extends RenderElement {
 
   /**
    * {@inheritdoc}

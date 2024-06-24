@@ -21,7 +21,6 @@ namespace Drupal\apigee_edge\Plugin\KeyProvider;
 
 use Drupal\apigee_edge\Exception\KeyProviderRequirementsException;
 use Drupal\Core\File\Exception\FileException;
-use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Utility\Error;
@@ -144,7 +143,7 @@ class PrivateFileKeyProvider extends KeyProviderRequirementsBase implements KeyP
     try {
       // Save the token data.
       return $this->getFileSystem()
-        ->saveData($key_value, $file_uri, FileExists::Replace);
+        ->saveData($key_value, $file_uri, FileSystemInterface::EXISTS_REPLACE);
     }
     catch (FileException $e) {
       return FALSE;

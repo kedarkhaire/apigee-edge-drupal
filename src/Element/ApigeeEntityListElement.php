@@ -22,16 +22,15 @@ namespace Drupal\apigee_edge\Element;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Render\Element\RenderElementBase;
-use Drupal\Core\Security\Attribute\TrustedCallback;
+use Drupal\Core\Render\Element\RenderElement;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides an element for listing Apigee entities.
  *
- * @RenderElementBase("apigee_entity_list")
+ * @RenderElement("apigee_entity_list")
  */
-class ApigeeEntityListElement extends RenderElementBase implements ContainerFactoryPluginInterface {
+class ApigeeEntityListElement extends RenderElement implements ContainerFactoryPluginInterface {
 
   /**
    * The entity type manager.
@@ -87,7 +86,6 @@ class ApigeeEntityListElement extends RenderElementBase implements ContainerFact
   /**
    * Pre-render callback.
    */
-  #[TrustedCallback]
   public function preRender($element) {
     $element['items'] = $this->entityTypeManager->getViewBuilder($element['#entity_type']->id())
       ->viewMultiple($element['#entities'], $element['#view_mode']);
