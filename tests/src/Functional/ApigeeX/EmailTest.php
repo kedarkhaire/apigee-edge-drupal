@@ -98,7 +98,6 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
     $this->assertSession()->pageTextContains('This email address accepts only lowercase characters.');
 
     // User editing own account.
-    
     $this->disableUserPresave();
     $account = $this->createAccount();
     $this->enableUserPresave();
