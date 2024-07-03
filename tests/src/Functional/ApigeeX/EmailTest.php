@@ -19,8 +19,8 @@
 
 namespace Drupal\Tests\apigee_edge\Functional\ApigeeX;
 
-use Drupal\Tests\apigee_edge\Functional\ApigeeX\ApigeeEdgeFunctionalTestBase;
 use Drupal\Core\Url;
+use Drupal\Tests\apigee_edge\Functional\ApigeeX\ApigeeEdgeFunctionalTestBase;
 
 /**
  * Developer email already exists in Apigee Edge related tests.
@@ -42,7 +42,7 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
 
     $this->addApigeexOrganizationMatchedResponse();
 
-    // Admin user editing self email
+    // Admin user editing self email.
 
     $this->drupalLogin($this->rootUser);
     $edit = [
@@ -57,7 +57,7 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
     $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains('This email address accepts only lowercase characters.');
 
-    // Admin user editing other user account
+    // Admin user editing other user account.
     $this->disableUserPresave();
     $account = $this->createAccount();
     $this->enableUserPresave();
@@ -68,7 +68,7 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
     ], 'Save');
     $this->assertSession()->pageTextContains('This email address accepts only lowercase characters.');
 
-    // Admin user creating a new user
+    // Admin user creating a new user.
 
     $adminuserCreate = [
       'name' => $this->randomMachineName(),
@@ -84,7 +84,7 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
     $this->assertSession()->pageTextContains('This email address accepts only lowercase characters.');
     $this->drupalLogout();
 
-    // Anonmyous user creating new account
+    // Anonmyous user creating new account.
 
     $userRegister = [
       'name' => $this->randomMachineName(),
@@ -97,7 +97,8 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
     $this->submitForm($userRegister, 'Create new account');
     $this->assertSession()->pageTextContains('This email address accepts only lowercase characters.');
 
-    // User editing own account
+    // User editing own account.
+    
     $this->disableUserPresave();
     $account = $this->createAccount();
     $this->enableUserPresave();
