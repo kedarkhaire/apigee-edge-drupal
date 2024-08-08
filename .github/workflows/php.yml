@@ -14,7 +14,12 @@ env:
   APIGEE_EDGE_HYBRID_ORGANIZATION: ${{ secrets.APIGEE_EDGE_HYBRID_ORGANIZATION }}
   BROWSERTEST_OUTPUT_DIRECTORY: "sites/simpletest/browser_output"
   BROWSERTEST_OUTPUT_BASE_URL: ""
-  MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "browserName":"chrome", "chromeOptions": { "w3c": false, "args":["--disable-gpu","--headless"] } }, "http://127.0.0.1:9515/wd/hub"]'
+  DRUPAL_TEST_WEBDRIVER_HOSTNAME: selenium-chrome
+  DRUPAL_TEST_WEBDRIVER_PORT: 4444
+  DRUPAL_TEST_WEBDRIVER_PATH_PREFIX: /wd/hub
+  DRUPAL_TEST_WEBDRIVER_CHROME_ARGS: --disable-gpu --headless --no-sandbox --disable-dev-shm-usage
+  DRUPAL_TEST_CHROMEDRIVER_AUTOSTART: false
+  #MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", { "browserName":"chrome", "chromeOptions": { "w3c": false, "args":["--disable-gpu","--headless"] } }, "http://127.0.0.1:9515/wd/hub"]'
 
 on:
   push:
