@@ -39,6 +39,11 @@ class EmailTest extends ApigeeEdgeFunctionalTestBase {
    * Tests camelcase email validation for Apigee X.
    */
   public function testEmailValidator() {
+    // Skipping the test if instance type is Public.
+    $instance_type = getenv('APIGEE_EDGE_INSTANCE_TYPE');
+    if (!empty($instance_type) && $instance_type === EdgeKeyTypeInterface::INSTANCE_TYPE_HYBRID) {
+      $this->markTestSkipped('This test suite is expecting a PUBLIC instance type.');
+    }
 
     $this->addApigeexOrganizationMatchedResponse();
 
