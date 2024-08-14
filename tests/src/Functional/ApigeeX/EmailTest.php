@@ -19,6 +19,7 @@
 
 namespace Drupal\Tests\apigee_edge\Functional\ApigeeX;
 
+use Drupal\apigee_edge\Plugin\EdgeKeyTypeInterface;
 use Drupal\Core\Url;
 use Drupal\Tests\apigee_edge\Functional\ApigeeX\ApigeeEdgeFunctionalTestBase;
 
