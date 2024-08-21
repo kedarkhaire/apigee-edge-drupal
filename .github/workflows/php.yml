@@ -95,7 +95,7 @@ jobs:
         composer config --no-plugins allow-plugins.cweagans/composer-patches true
         composer config --no-plugins allow-plugins.php-http/discovery true        
         composer config minimum-stability dev
-        composer require 'drupal/rules:3.x-dev@dev'
+        composer require 'drupal/rules:4.x'
         composer require wikimedia/composer-merge-plugin
         composer config --json extra.merge-plugin.require '["modules/contrib/apigee_edge/composer.json"]'
         composer config platform.php ${{ matrix.php-version }}
