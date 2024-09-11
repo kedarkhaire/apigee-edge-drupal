@@ -142,8 +142,9 @@ class PrivateFileKeyProvider extends KeyProviderRequirementsBase implements KeyP
 
     try {
       // Save the token data.
-      return $this->getFileSystem()
-        ->saveData($key_value, $file_uri, FileSystemInterface::EXISTS_REPLACE);
+      // @todo class constant EXISTS_REPLACE is deprecated for Drupal 10.3 & is removed from drupal:12.0. Use \Drupal\Core\File\FileExists::Replace instead. https://www.drupal.org/node/3426517
+      // @phpstan-ignore-next-line
+      return $this->getFileSystem()->saveData($key_value, $file_uri, FileSystemInterface::EXISTS_REPLACE);
     }
     catch (FileException $e) {
       return FALSE;
