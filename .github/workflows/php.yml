@@ -107,7 +107,7 @@ jobs:
     - name: Rules module condition for Drupal ^10.3
       if: ${{ matrix.drupal-core == '10.3.x' }}
       run: |
-        composer require 'drupal/rules:4.x'
+        composer require 'drupal/rules:^4.0'
 
     - name: Rules module condition till Drupal 10.2
       if: ${{ matrix.drupal-core == '10.2.x' }}
