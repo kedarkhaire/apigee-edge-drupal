@@ -29,7 +29,7 @@ use Drupal\Core\Render\Element\RenderElement;
  */
 /**
  * Provides an app credential element.
- * 
+ *
  * @todo class RenderElement is deprecated for Drupal 10.3 & is removed from drupal:12.0. Use \Drupal\Core\Render\Element\RenderElementBase instead. https://www.drupal.org/node/3436275
  * @phpstan-ignore-next-line
  */

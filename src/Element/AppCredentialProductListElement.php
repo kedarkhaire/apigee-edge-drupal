@@ -23,7 +23,6 @@ namespace Drupal\apigee_edge\Element;
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
- * @file
  * Provides a product listing element for app credentials.
  *
  * @RenderElement("app_credential_product_list")
