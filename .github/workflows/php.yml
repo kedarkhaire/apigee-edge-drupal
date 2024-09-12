@@ -99,15 +99,18 @@ jobs:
     - name: "Rules module condition for Drupal ^10.3"
       if: ${{ matrix.drupal-core == '10.3.x' }}
       run: |
+        cd drupal
         composer require 'drupal/rules:^4.0'
 
     - name: "Rules module condition till Drupal 10.2"
       if: ${{ matrix.drupal-core == '10.2.x' }}
       run: |
+        cd drupal
         composer require 'drupal/rules:3.x-dev@dev'
 
     - name: "Allow dev dependencies"
       run: |
+        cd drupal
         composer require wikimedia/composer-merge-plugin
         composer config --json extra.merge-plugin.require '["modules/contrib/apigee_edge/composer.json"]'
         composer config platform.php ${{ matrix.php-version }}
