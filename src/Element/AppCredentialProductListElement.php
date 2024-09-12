@@ -23,11 +23,14 @@ namespace Drupal\apigee_edge\Element;
 use Drupal\Core\Render\Element\RenderElement;
 
 /**
+ * @file
  * Provides a product listing element for app credentials.
  *
  * @RenderElement("app_credential_product_list")
  */
 /**
+ * Provides a product listing element for app credentials.
+ *
  * @todo class RenderElement is deprecated for Drupal 10.3 & is removed from drupal:12.0. Use \Drupal\Core\Render\Element\RenderElementBase instead. https://www.drupal.org/node/3436275
  * @phpstan-ignore-next-line
  */
