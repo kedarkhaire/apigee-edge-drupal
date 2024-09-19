@@ -83,7 +83,7 @@ jobs:
       with:
         path: drupal/modules/contrib/apigee_edge
 
-    - name: "Allow plugins and allow dev dependencies"
+    - name: "Allow plugins and dev dependencies"
       run: |
         cd drupal
         composer config --no-plugins allow-plugins.composer/installers true
@@ -99,9 +99,6 @@ jobs:
         composer config --json extra.merge-plugin.require '["modules/contrib/apigee_edge/composer.json"]'
         composer config platform.php ${{ matrix.php-version }}
         composer config --json extra.patches."drupal/core" '{ "TypeError: FieldTypePluginManager::createFieldItem() called in FieldStorageConfig.php": "https://www.drupal.org/files/issues/2024-05-27/field-typeerror-3450175-3.patch", "Support entities that are neither content nor config entities": "https://www.drupal.org/files/issues/2020-12-02/3042467-50.patch", "Add a method to access the original property": "https://www.drupal.org/files/issues/2023-07-22/2839195-105.patch"}'
-        composer require --dev phpspec/prophecy-phpunit:^2
-        composer require --dev drupal/classy:^1.0
-        composer config --no-plugins allow-plugins.drupal/console-extend-plugin true
 
     - name: "Rules module condition for Drupal ^10.3"
       if: ${{ matrix.drupal-core == '10.3.x' }}
@@ -109,6 +106,9 @@ jobs:
         cd drupal
         composer require 'drupal/rules:^4.0'
         composer update --with-all-dependencies
+        composer require --dev phpspec/prophecy-phpunit:^2
+        composer require --dev drupal/classy:^1.0
+        composer config --no-plugins allow-plugins.drupal/console-extend-plugin true
 
     - name: "Rules module condition till Drupal 10.2"
       if: ${{ matrix.drupal-core == '10.2.x' }}
@@ -116,6 +116,9 @@ jobs:
         cd drupal
         composer require 'drupal/rules:3.x-dev@dev'
         composer update --with-all-dependencies
+        composer require --dev phpspec/prophecy-phpunit:^2
+        composer require --dev drupal/classy:^1.0
+        composer config --no-plugins allow-plugins.drupal/console-extend-plugin true
         
     # Install drupal using minimal installation profile and enable the module.
     - name: Install Drupal
