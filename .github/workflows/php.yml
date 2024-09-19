@@ -106,7 +106,7 @@ jobs:
         composer require --dev drupal/classy:^1.0
         composer config --no-plugins allow-plugins.drupal/console-extend-plugin true
 
-    - name: "Allow plugins and dev dependencies Drupal 10.2"
+    - name: "Allow plugins and dev dependencies for Drupal 10.2"
       if: ${{ matrix.drupal-core == '10.2.x' }}
       run: |
         cd drupal
@@ -149,7 +149,8 @@ jobs:
         echo "APIGEE_EDGE_ENDPOINT=$APIGEE_EDGE_HYBRID_ENDPOINT" >> $GITHUB_ENV
         composer show > composer-show.txt
 
-    - name: "Drupal check"
+    - name: "Drupal check for Drupal 10.2"
+      if: ${{ matrix.drupal-core == '10.2.x' }}
       run: |
         cd drupal
         vendor/bin/drupal-check modules/contrib/apigee_edge
