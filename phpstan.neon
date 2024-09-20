@@ -1,0 +1,11 @@
+# FROM mglaman/drupal-check/phpstan/deprecation_testing.neon
+parameters:
+	# FROM mglaman/drupal-check/phpstan/base_config.neon
+	reportUnmatchedIgnoredErrors: false
+	excludePaths:
+		- */modules/apigee_edge_teams/src/TeamPermissionHandler.php
+		- */src/Element/*.php
+		- */src/Entity/ListBuilder/AppListBuilder.php
+		- */src/OauthTokenFileStorage.php
+		- */src/Plugin/KeyProvider/PrivateFileKeyProvider.php
+    - */tests/src/Kernel/OauthTokenFileStorageTest.php
