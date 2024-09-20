@@ -38,6 +38,7 @@ jobs:
         drupal-core:
           # Should update the following as the minimum supported version from Drupal.org
           - "10.2.x"
+          - "10.3.x"
         instance-type:
           - "Edge"
           - "X"
@@ -82,7 +83,31 @@ jobs:
       with:
         path: drupal/modules/contrib/apigee_edge
 
-    - name: "Allow plugins and dev dependencies"
+     - name: "Allow plugins and dev dependencies for Drupal ^10.3, "
+      if: ${{ matrix.drupal-core == '10.3.x' }}
+      run: |
+        cd drupal
+        composer config --no-plugins allow-plugins.composer/installers true
+        composer config --no-plugins allow-plugins.drupal/core-composer-scaffold true
+        composer config --no-plugins allow-plugins.drupal/core-project-message true
+        composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+        composer config --no-plugins allow-plugins.wikimedia/composer-merge-plugin true
+        composer config --no-plugins allow-plugins.composer/package-versions-deprecated true
+        composer config --no-plugins allow-plugins.cweagans/composer-patches true
+        composer config --no-plugins allow-plugins.php-http/discovery true        
+        composer config minimum-stability dev
+        composer require 'drupal/rules:^4.0'
+        composer require wikimedia/composer-merge-plugin
+        composer config --json extra.merge-plugin.require '["modules/contrib/apigee_edge/composer.json"]'
+        composer config platform.php ${{ matrix.php-version }}
+        composer config --json extra.patches."drupal/core" '{ "Support entities that are neither content nor config entities": "https://www.drupal.org/files/issues/2020-12-02/3042467-50.patch", "Add a method to access the original property": "https://www.drupal.org/files/issues/2023-07-22/2839195-105.patch"}'
+        composer update --with-all-dependencies
+        composer require --dev phpspec/prophecy-phpunit:^2
+        composer require --dev drupal/classy:^1.0
+        composer config --no-plugins allow-plugins.drupal/console-extend-plugin true
+
+    - name: "Allow plugins and dev dependencies for Drupal 10.2"
+      if: ${{ matrix.drupal-core == '10.2.x' }}
       run: |
         cd drupal
         composer config --no-plugins allow-plugins.composer/installers true
@@ -124,7 +149,8 @@ jobs:
         echo "APIGEE_EDGE_ENDPOINT=$APIGEE_EDGE_HYBRID_ENDPOINT" >> $GITHUB_ENV
         composer show > composer-show.txt
 
-    - name: "Drupal check"
+    - name: "Drupal check for Drupal 10.2"
+      if: ${{ matrix.drupal-core == '10.2.x' }}
       run: |
         cd drupal
         vendor/bin/drupal-check modules/contrib/apigee_edge
