@@ -150,7 +150,7 @@ jobs:
         composer show > composer-show.txt
 
     - name: "Drupal check for Drupal 10.2"
-      if: ${{ matrix.drupal-core == '10.2.x' }}
+      if: ${{ matrix.drupal-core == '10.3.x' }}
       run: |
         cd drupal
         vendor/bin/drupal-check modules/contrib/apigee_edge
