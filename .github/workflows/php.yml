@@ -83,7 +83,7 @@ jobs:
       with:
         path: drupal/modules/contrib/apigee_edge
 
-     - name: "Allow plugins and dev dependencies"
+    - name: "Allow plugins and dev dependencies"
       run: |
         cd drupal
         composer config --no-plugins allow-plugins.composer/installers true
