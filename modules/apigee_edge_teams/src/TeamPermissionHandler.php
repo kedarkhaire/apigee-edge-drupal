@@ -300,8 +300,7 @@ final class TeamPermissionHandler implements TeamPermissionHandlerInterface {
     $modules = [];
     foreach (array_keys($this->moduleHandler->getModuleList()) as $module) {
       // @todo getName() is deprecated for Drupal 10.3 & is removed from drupal:12.0. Use \Drupal::service('extension.list.module')->getName($module) instead. https://www.drupal.org/node/3310017
-      // @phpstan-ignore-next-line
-      $modules[$module] = $this->moduleHandler->getName($module);
+      $modules[$module] = $this->moduleHandler->getName($module); // @phpstan-ignore argument.type
     }
     asort($modules);
     return $modules;

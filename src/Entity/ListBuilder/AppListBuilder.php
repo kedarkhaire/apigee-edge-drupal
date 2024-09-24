@@ -291,8 +291,7 @@ class AppListBuilder extends EdgeEntityListBuilder {
       $link = Link::fromTextAndUrl($this->t('<span class="ui-icon-triangle-1-e ui-icon"></span><span class="text">Show details</span>'), $url);
       $build['warning-toggle'] = $link->toRenderable();
       // @todo renderPlain() is deprecated for Drupal 10.3 & is removed from drupal:12.0. Use \Drupal\Core\Render\RendererInterface::renderInIsolation() instead. https://www.drupal.org/node/3407994
-      // @phpstan-ignore-next-line
-      $rows[$info_row_css_id]['data']['status']['data'] = $this->renderer->renderPlain($build);
+      $rows[$info_row_css_id]['data']['status']['data'] = $this->renderer->renderPlain($build); // @phpstan-ignore argument.type
       $row['data']['info'] = [
         'colspan' => count($this->buildHeader()),
       ];
