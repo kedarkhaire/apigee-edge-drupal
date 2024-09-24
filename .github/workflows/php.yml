@@ -95,7 +95,6 @@ jobs:
         composer config --no-plugins allow-plugins.cweagans/composer-patches true
         composer config --no-plugins allow-plugins.php-http/discovery true        
         composer config minimum-stability dev
-        composer require 'drupal/rules:3.x-dev@dev'
         composer require wikimedia/composer-merge-plugin
         composer config --json extra.merge-plugin.require '["modules/contrib/apigee_edge/composer.json"]'
         composer config platform.php ${{ matrix.php-version }}
@@ -107,6 +106,13 @@ jobs:
 
     - name: "Allow plugins and dev dependencies for Drupal 10.2"
       if: ${{ matrix.drupal-core == '10.2.x' }}
+      run: |
+        cd drupal
+        composer require 'drupal/rules:3.x-dev@dev'
+        composer update --with-all-dependencies
+    
+    - name: "Allow plugins and dev dependencies for Drupal 10.3"
+      if: ${{ matrix.drupal-core == '10.3.x' }}
       run: |
         cd drupal
         composer require 'drupal/rules:^4.0'
