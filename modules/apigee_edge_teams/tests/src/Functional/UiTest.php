@@ -167,7 +167,7 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     // Create a new team and check whether the link to the team is visible on
     // the listing page.
     $this->clickLink('Add team');
-    $team_name = $team_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'),0,8);
+    $team_name = $team_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 8);
     $this->submitForm([
       'name' => $team_name,
       'displayName[0][value]' => $team_display_name,
@@ -187,7 +187,7 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     // Update the team and check whether the updated name and field values are
     // visible on the listing and canonical pages.
     $this->clickLink('Edit');
-    $team_modified_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'),0,8);
+    $team_modified_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 8);
     $this->submitForm([
       'displayName[0][value]' => $team_modified_display_name,
       'field_integer[0][value]' => $this->fields['integer']['data_edited'],
@@ -225,7 +225,7 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     $this->assertSession()->pageTextContains('There are no team apps yet.');
     $this->clickLink('Add team app');
 
-    $team_app_1_name = $team_app_1_display_name = mb_strtolower(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'),0,8));
+    $team_app_1_name = $team_app_1_display_name = mb_strtolower(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 8));
     $this->submitForm([
       'name' => $team_app_1_name,
       'displayName[0][value]' => $team_app_1_display_name,
@@ -241,7 +241,7 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
 
     // Update the previously created team app and check the updated values.
     $this->clickLink('Edit');
-    $team_app_1_modified_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'),0,8);
+    $team_app_1_modified_display_name = substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 8);
     $this->submitForm([
       'displayName[0][value]' => $team_app_1_modified_display_name,
       'field_integer[0][value]' => $this->fields['integer']['data_edited'],
