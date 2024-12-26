@@ -155,7 +155,7 @@ jobs:
       if: ${{ matrix.drupal-core != '10.2.x' || matrix.php-version != '8.2' }}
       run: |
         cd drupal
-        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge/modules/apigee_edge_teams/Functional/UiTest
+        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge/modules/apigee_edge_teams/tests/src/Functional/UiTest.php
 
     # - name: "Run PHPUnit tests with Code Coverage"
     #   if: ${{ matrix.drupal-core == '10.2.x' && matrix.php-version == '8.2' }}
