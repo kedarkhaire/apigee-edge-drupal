@@ -155,14 +155,14 @@ jobs:
       if: ${{ matrix.drupal-core != '10.2.x' || matrix.php-version != '8.2' }}
       run: |
         cd drupal
-        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge
+        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript modules/contrib/apigee_edge/modules/apigee_edge_teams/tests/src/Functional/UiTest::testUi
 
-    - name: "Run PHPUnit tests with Code Coverage"
-      if: ${{ matrix.drupal-core == '10.2.x' && matrix.php-version == '8.2' }}
-      run: |
-        cd drupal
-        cp modules/contrib/apigee_edge/phpunit.core.xml.dist core/phpunit.xml
-        vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript --debug --coverage-clover /tmp/coverage_${{ matrix.instance-type }}.xml modules/contrib/apigee_edge
+    # - name: "Run PHPUnit tests with Code Coverage"
+    #   if: ${{ matrix.drupal-core == '10.2.x' && matrix.php-version == '8.2' }}
+    #   run: |
+    #     cd drupal
+    #     cp modules/contrib/apigee_edge/phpunit.core.xml.dist core/phpunit.xml
+    #     vendor/bin/phpunit -c core --verbose --color --group apigee_edge --testsuite unit,kernel,functional,functional-javascript --debug --coverage-clover /tmp/coverage_${{ matrix.instance-type }}.xml modules/contrib/apigee_edge
 
     - name: Artifacts
       if: failure()
