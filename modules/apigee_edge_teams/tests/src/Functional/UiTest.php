@@ -257,6 +257,10 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     // Login with the default user, the created team app should be visible on
     // the team app administer collection page (/team-apps).
     $this->drupalLogin($this->account);
+    echo "Team" . "\r\n";
+    print_r($this->team);
+    echo "\r\n" . "Collection" . "\r\n"";
+    print_r($this->team->toUrl('collection'));
     $this->drupalGet($this->team->toUrl('collection'));
     $this->assertSession()->linkExists($team_modified_display_name);
     $this->assertSession()->linkExists($team_app_1_modified_display_name);
