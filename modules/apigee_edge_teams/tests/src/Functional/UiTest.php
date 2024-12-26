@@ -248,7 +248,6 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
       'field_email[0][value]' => $this->fields['email']['data_edited'],
     ], 'Save');
     $this->assertSession()->pageTextContains('team app has been successfully updated.');
-    // $this->assertSession()->pageTextContains('Credential's product list has been successfully updated.');
     $this->clickLink($team_app_1_modified_display_name);
     $this->assertSession()->pageTextContains($team_app_1_modified_display_name);
     $this->assertSession()->pageTextContains($this->fields['integer']['data_edited']);
@@ -268,6 +267,8 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     $this->drupalGet($this->team->toUrl('collection'));
     $this->assertSession()->linkExists($team_modified_display_name);
     $this->clickLink('Team Apps');
+    $this->assertSession()->pageTextContains($team_app_1_display_name);
+    $this->clickLink($team_app_1_display_name);
     $this->assertSession()->pageTextContains($team_app_1_modified_display_name);
     $this->assertSession()->linkExists($team_app_1_modified_display_name);
 
