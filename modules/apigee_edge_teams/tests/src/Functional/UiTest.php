@@ -238,6 +238,8 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     $this->assertSession()->pageTextContains($team_app_1_display_name);
     $this->assertSession()->pageTextContains($this->fields['integer']['data']);
     $this->assertSession()->pageTextContains($this->fields['email']['data']);
+    echo "\r\n Team App Display Name \r\n";
+    echo $team_app_1_name;
 
     // Update the previously created team app and check the updated values.
     $this->clickLink('Edit');
