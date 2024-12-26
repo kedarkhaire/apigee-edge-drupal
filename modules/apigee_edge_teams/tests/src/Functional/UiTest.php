@@ -175,6 +175,8 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
       'field_email[0][value]' => $this->fields['email']['data'],
     ], 'Add team');
     $this->team = $this->teamStorage->load($team_display_name);
+    echo "\r\n Team Modified Display Name \r\n";
+    echo $team_display_name;
 
     // The team's display name and field values are visible on the canonical
     // page.
