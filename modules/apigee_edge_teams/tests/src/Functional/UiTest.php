@@ -268,7 +268,7 @@ class UiTest extends ApigeeEdgeTeamsFunctionalTestBase {
     print_r($team_app_1_modified_display_name);
     $this->drupalGet($this->team->toUrl('collection'));
     $this->assertSession()->linkExists($team_modified_display_name);
-    $this->clickLink('Team Apps');
+    $this->clickLink($team_modified_display_name);
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($team_app_1_modified_display_name);
     $this->assertSession()->linkExists($team_app_1_modified_display_name);
