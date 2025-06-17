@@ -20,6 +20,7 @@
 namespace Drupal\apigee_edge\Plugin\KeyProvider;
 
 use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Utility\Error;
@@ -37,7 +38,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "apigee_edge_private_file",
  *   label = @Translation("Apigee Edge: Private File"),
  *   description = @Translation("Stores Apigee Edge authentication credentials in a private file.</p>"),
- *   storage_method = "apigee_edge",
+ *   tags = {
+ *     "apigee_edge",
+ *   },
  *   key_value = {
  *     "accepted" = TRUE,
  *     "required" = FALSE
@@ -143,7 +146,7 @@ class PrivateFileKeyProvider extends KeyProviderRequirementsBase implements KeyP
     try {
       // Save the token data.
       return $this->getFileSystem()
-        ->saveData($key_value, $file_uri, FileSystemInterface::EXISTS_REPLACE);
+        ->saveData($key_value, $file_uri, FileExists::Replace);
     }
     catch (FileException $e) {
       return FALSE;
