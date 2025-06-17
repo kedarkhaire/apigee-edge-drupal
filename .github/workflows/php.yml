@@ -113,7 +113,7 @@ jobs:
         composer update --with-all-dependencies
 
     - name: "Allow plugins and dev dependencies for Drupal 10.3"
-      if: ${{ matrix.drupal-core == '10.3.x' }}
+      if: ${{ matrix.drupal-core == '10.3.x' || matrix.drupal-core == '10.4.x' }}
       run: |
         cd drupal
         composer require 'drupal/rules:^4.0'
