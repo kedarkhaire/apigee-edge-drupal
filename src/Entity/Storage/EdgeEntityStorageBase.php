@@ -539,4 +539,5 @@ abstract class EdgeEntityStorageBase extends DrupalEntityStorageBase implements 
     }
     parent::setStaticCache($entities);
   }
+  
 }
